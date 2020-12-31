@@ -1,0 +1,9 @@
+GET into fastboot mode on CAM50
+1. reboot and press "ENTER" on PC
+2. cam50 will get into uboot console mode
+3, type command "fastboot usb 0" to enbale fastboot server
+
+Use below command on PC to upgrade image
+.\fastboot.exe flash kernel1 .\images\kernel.bin
+.\fastboot.exe flash nvrservice1 .\images\nvrservice.sqfs.bin
+.\fastboot.exe flash rootfs1 .\images\rootfs.ramfs.bin
