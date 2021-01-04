@@ -26,6 +26,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.Browse_btn.pressed.connect(self.browse_img)
         self.Upgrade_btn.pressed.connect(self.upgrade_img)
         self.cmd_send_btn.pressed.connect(self.send_cmd)
+        self.cmd_lineEdit.returnPressed.connect(self.send_cmd)
         self.show()
 
     def device_not_found(self, err_msg):
