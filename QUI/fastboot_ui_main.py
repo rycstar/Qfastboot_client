@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
+from adb import fastboot
 from fastboot_ui_layout import Ui_MainWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):

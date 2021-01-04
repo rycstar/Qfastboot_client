@@ -1,8 +1,9 @@
-####Project introduction
+**Project introduction**
+
     This project aim to implement a Fastboot client to upgrade images to Android/embedded devices
     For better user experiense, pyqt5 is a good choise.
 
-####Development environment
+**Development environment**
 
     1. Install Python3.0+
         Too many documents and instructions, find it on Google.
@@ -12,7 +13,7 @@
     3. Install python ADB
         pip install adb
 
-####Arch Preview
+**Arch Preview**
 
     1. UI designer
         a)  find and open qt designer. For exampe:
@@ -21,7 +22,7 @@
         c) Use pyuic5 to translate the .ui file. for example:
             <Python-path>\Scripts\pyuic5.exe .\QUI\fastboot.ui -o .\QUI\fastboot_ui_layout.py
 
-####Issues
+**Issues**
 
     1. error in adb install:
         a) Error Info: 'error: Microsoft Visual C++ 14.0 is required. 
@@ -43,7 +44,8 @@
     At last, run 'pip install adb-1.3.0-py3-none-any.whl' to add it into python package.
 
 
-####Links
+**Links**
+
 1. https://blog.csdn.net/u013541325/article/details/107742835
 2. https://github.com/google/python-adb
 3. https://blog.csdn.net/weixin_40547993/article/details/89399825
