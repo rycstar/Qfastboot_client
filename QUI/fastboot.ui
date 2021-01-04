@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>683</width>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,13 +16,34 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="5,1">
+     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="5,1">
+      <item>
+       <widget class="QLabel" name="device_label">
+        <property name="text">
+         <string>Device Information</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="detect_btn">
+        <property name="text">
+         <string>Detect Device</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="4,1,1">
       <item>
        <widget class="QLabel" name="select_file_label">
         <property name="text">
          <string>Select upgrade file</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="filetype_comboBox"/>
       </item>
       <item>
        <widget class="QPushButton" name="Browse_btn">
@@ -58,6 +79,23 @@
      </layout>
     </item>
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,1">
+      <item>
+       <widget class="QLineEdit" name="cmd_lineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmd_send_btn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Send CMD</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QTextBrowser" name="log_textBrowser"/>
     </item>
    </layout>
@@ -67,7 +105,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>640</width>
+     <width>683</width>
      <height>23</height>
     </rect>
    </property>
