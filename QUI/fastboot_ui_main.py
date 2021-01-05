@@ -12,6 +12,7 @@ from threading import Thread,Semaphore
 from adb import fastboot
 from adb import usb_exceptions
 from fastboot_ui_layout import Ui_MainWindow
+#from operator import length_hint
 
 g_queue = queue.Queue(maxsize=1)
 g_sem = Semaphore(0)
@@ -55,8 +56,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.device_label.setStyleSheet("color:red")
                 self.device_label.setText("No device found")
                 self.cmd_send_btn.setEnabled(False)
-        elif(result.startswith('upgrade')):
+        elif(result.startswith('progress')):
             fields = re.split(r'[=:]',result)
+            #if(length_hint(fields) != 3):
+            #    return
             if(int(fields[1]) == int(fields[2])):
                 self.log_textBrowser.append("<font color=red>"+"Image Download Done, device is writing flash, waiting for a minute!!!")
             self.upgrade_progressBar.setMinimum(0)
@@ -137,7 +140,7 @@ class fastboot_client(object):
         self.thread.start()
 
     def upgrade_progress(self, current, total):
-        self.fastboot_cmd_result("upgrade",str(current)+":"+str(total))
+        self.fastboot_cmd_result("progress",str(current)+":"+str(total))
 
     def fastboot_cmd_result(self, cmd, log):
         g_result_list.append("[RES]"+cmd +"="+log)
