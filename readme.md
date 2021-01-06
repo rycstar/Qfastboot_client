@@ -10,7 +10,7 @@
     2. Install PyQt5
         pip install pyqt5
         pip install pyqt5-tools   (for QT designer and pyuic5)
-    3. Install python ADB
+    3. Install python ADB (this step can be ignored in latest verison)
         pip install adb
 
 **Arch Preview**
