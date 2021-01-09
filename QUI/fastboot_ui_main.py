@@ -46,26 +46,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.show()
 
     def cmd_result_hdl(self, result):
-        if(result.startswith('detect')):
-            fields = re.split(r'[=]',result)
-            if(int(fields[1]) > 0):
-                self.device_label.setStyleSheet("color:blue")
-                self.device_label.setText(fields[1]+" device(s) found")
-                self.cmd_send_btn.setEnabled(True)
-            else:
-                self.device_label.setStyleSheet("color:red")
-                self.device_label.setText("No device found")
-                self.cmd_send_btn.setEnabled(False)
-        elif(result.startswith('progress')):
-            fields = re.split(r'[=:]',result)
-            #if(length_hint(fields) != 3):
-            #    return
-            if(int(fields[1]) == int(fields[2])):
-                self.log_textBrowser.append("<font color=red>"+"Image Download Done, device is writing flash, waiting for a minute!!!")
-            self.upgrade_progressBar.setMinimum(0)
-            self.upgrade_progressBar.setMaximum(int(fields[2]))
-            self.upgrade_progressBar.setValue(int(fields[1]))
-
+        try:
+            if(result.startswith('detect')):
+                fields = re.split(r'[=]',result)
+                if(int(fields[1]) > 0):
+                    self.device_label.setStyleSheet("color:blue")
+                    self.device_label.setText(fields[1]+" device(s) found")
+                    self.cmd_send_btn.setEnabled(True)
+                else:
+                    self.device_label.setStyleSheet("color:red")
+                    self.device_label.setText("No device found")
+                    self.cmd_send_btn.setEnabled(False)
+            elif(result.startswith('progress')):
+                fields = re.split(r'[=:]',result)
+                #if(length_hint(fields) != 3):
+                #    return
+                if(int(fields[1]) == int(fields[2])):
+                    self.log_textBrowser.append("<font color=red>"+"Image Download Done, device is writing flash, waiting for a minute!!!")
+                self.upgrade_progressBar.setMinimum(0)
+                self.upgrade_progressBar.setMaximum(int(fields[2]))
+                self.upgrade_progressBar.setValue(int(fields[1]))
+            elif(result.startswith('[Error]')):
+                self.log_textBrowser.append("<font color=red>"+"[CMD Error]:"+result)
+        except Exception as e:
+            self.log_textBrowser.append("<font color=red>"+"[CMD unknown error]:"+result)
 
     def cmd_result_update(self):
         if(g_sem.acquire(timeout=0.05)):
@@ -177,6 +181,11 @@ class fastboot_client(object):
                     self.usb_dev.Reboot()
                 self.usb_dev.Close()
             except fastboot.FastbootRemoteFailure:
+                self.fastboot_cmd_result("[Error]", 'Remote not support')
+                pass
+            except usb_exceptions.DeviceNotFoundError:
+                self.fastboot_cmd_result("detect", '0')
+                self.fastboot_cmd_result("[Error]", 'No device found')
                 pass
             except:
                 self.fastboot_cmd_result(item,"except error")
